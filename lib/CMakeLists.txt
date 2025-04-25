@@ -258,8 +258,15 @@ target_link_libraries(elements PUBLIC PkgConfig::freetype2)
 ###############################################################################
 # Webp
 
-pkg_check_modules(libwebp REQUIRED IMPORTED_TARGET libwebp)
-target_link_libraries(elements PUBLIC PkgConfig::libwebp)
+FetchContent_Declare(
+   libwebp
+   GIT_REPOSITORY https://chromium.googlesource.com/webm/libwebp
+   GIT_TAG v1.3.1
+   GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(libwebp)
+
+target_link_libraries(elements PUBLIC webp)
 
 ###############################################################################
 # GTK3
